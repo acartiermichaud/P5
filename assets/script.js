@@ -21,10 +21,23 @@ const slides = [
 // EventListeners on arrows
 const arrowLeft = document.querySelector(".arrow_left")
 arrowLeft.addEventListener ("click", () => {
-console.log("Vous avez cliqué sur le bouton gauche.")
+	console.log("Vous avez cliqué sur le bouton gauche.")
 })
 
 const arrowRight = document.querySelector(".arrow_right")
 arrowRight.addEventListener ("click", () => {
-console.log("Vous avez cliqué sur le bouton droit.")
+	console.log("Vous avez cliqué sur le bouton droit.")
 })
+
+
+// Bullet points
+const divDots = document.querySelector(".dots")
+
+for (let i = 0; i < slides.length; i++) {
+	const dotElement = document.createElement("div")
+	dotElement.classList.add("dot")
+	if (i===0) {
+		dotElement.classList.add("dot_selected")
+	}
+	divDots.appendChild(dotElement)
+} 
