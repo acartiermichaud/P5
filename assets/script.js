@@ -16,3 +16,15 @@ const slides = [
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
+
+
+// EventListeners on arrows
+const arrowLeft = document.querySelector(".arrow_left")
+arrowLeft.addEventListener ("click", () => {
+console.log("Vous avez cliqué sur le bouton gauche.")
+})
+
+const arrowRight = document.querySelector(".arrow_right")
+arrowRight.addEventListener ("click", () => {
+console.log("Vous avez cliqué sur le bouton droit.")
+})
