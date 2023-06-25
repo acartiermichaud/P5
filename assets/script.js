@@ -1,3 +1,4 @@
+// Slide details
 const slides = [
 	{
 		"image":"slide1.jpg",
@@ -51,12 +52,24 @@ function newIndexCalculation (direction) {
 			dotsList[i] = false
 
 			if (direction==="right") {
-				dotsList[i+1] = true
-				return [i, i+1]
+				if (i+1 === dotsList.length) {
+					dotsList[0] = true
+					return [i, 0]
+				}
+				else {
+					dotsList[i+1] = true
+					return [i, i+1]
+				}
 			}
 			else {
-				dotsList[i-1] = true
-				return [i, i-1]
+				if (i === 0) {
+					dotsList[dotsList.length-1] = true
+					return [i, dotsList.length-1]
+				}
+				else {
+					dotsList[i-1] = true
+					return [i, i-1]
+				}
 			}
 		}
 	}
@@ -104,4 +117,3 @@ arrowRight.addEventListener ("click", () => {
 	dotsUpdate (oldPos, newPos)
 	imageUpdate (newPos)
 })
-
