@@ -1,4 +1,6 @@
-// Slide details
+// Global variables *****************************************
+
+// Array of slides details
 const slides = [
 	{
 		"image":"slide1.jpg",
@@ -19,15 +21,19 @@ const slides = [
 ]
 
 
+// Array of dots states
+let dotsArray = []
 
-// Functions *****************************************
+
+
+// Functions ***********************************************
 
 // Bullet points creation
-function dotsCreation (slideList) {
+function dotsCreation (slideArray) {
 
-	const divDots = document.querySelector(".dots")
+	const dotsContener = document.querySelector(".dots")
 
-	for (let i = 0; i < slideList.length; i++) {
+	for (let i = 0; i < slideArray.length; i++) {
 		let selectedState = false
 		const dotElement = document.createElement("div")
 		dotElement.classList.add("dot")
@@ -38,42 +44,44 @@ function dotsCreation (slideList) {
 			dotElement.classList.add("dot_selected")
 		}
 
-		dotsList.push(selectedState)
-		divDots.appendChild(dotElement)
+		dotsArray.push(selectedState)
+		dotsContener.appendChild(dotElement)
 	}
 }
+
 
 // Calculation of new index
 function newIndexCalculation (direction) {
 
-	for (let i = 0; i < dotsList.length; i++) {
+	for (let i = 0; i < dotsArray.length; i++) {
 		
-		if (dotsList[i]) {
-			dotsList[i] = false
+		if (dotsArray[i]) {
+			dotsArray[i] = false
 
 			if (direction==="right") {
-				if (i+1 === dotsList.length) {
-					dotsList[0] = true
+				if (i === dotsArray.length-1) {
+					dotsArray[0] = true
 					return [i, 0]
 				}
 				else {
-					dotsList[i+1] = true
+					dotsArray[i+1] = true
 					return [i, i+1]
 				}
 			}
 			else {
 				if (i === 0) {
-					dotsList[dotsList.length-1] = true
-					return [i, dotsList.length-1]
+					dotsArray[dotsArray.length-1] = true
+					return [i, dotsArray.length-1]
 				}
 				else {
-					dotsList[i-1] = true
+					dotsArray[i-1] = true
 					return [i, i-1]
 				}
 			}
 		}
 	}
 }
+
 
 // Dots update
 function dotsUpdate (oldPos, newPos) {
@@ -84,21 +92,23 @@ function dotsUpdate (oldPos, newPos) {
 	newDot.classList.add("dot_selected")
 }
 
+
 // Image update
 function imageUpdate (newPos) {
 	let imageContener = document.querySelector(".banner-img")
-	imageContener.src = `/home/amandine/Documents/OpenClassRooms/FormationIntegrateurWeb/Projet_5/P5_GitHub/P5/assets/images/slideshow/${slides[newPos].image}`
+	imageContener.src = `./assets/images/slideshow/${slides[newPos].image}`
 	let imageText = document.querySelector(".banner-txt")
 	imageText.innerHTML = `<p>${slides[newPos].tagLine}</p>`
 }
 
 
 
-// Main *****************************************
-let dotsList = []
+// Main ****************************************************
+
 dotsCreation(slides)
 
-// EventListener on arrow left
+
+// EventListener on left arrow
 const arrowLeft = document.querySelector(".arrow_left")
 arrowLeft.addEventListener ("click", () => {
 	positions = newIndexCalculation("left")
@@ -108,7 +118,8 @@ arrowLeft.addEventListener ("click", () => {
 	imageUpdate (newPos)
 })
 
-// EventListener on arrow right
+
+// EventListener on right arrow
 const arrowRight = document.querySelector(".arrow_right")
 arrowRight.addEventListener ("click", () => {
 	positions = newIndexCalculation("right")
