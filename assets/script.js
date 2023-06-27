@@ -29,11 +29,11 @@ let dotsArray = []
 // Functions ***********************************************
 
 // Bullet points creation
-function dotsCreation (slideArray) {
+function dotsCreation () {
 
 	const dotsContener = document.querySelector(".dots")
 
-	for (let i = 0; i < slideArray.length; i++) {
+	for (let i = 0; i < slides.length; i++) {
 		let selectedState = false
 		
 		const dotElement = document.createElement("div")
@@ -107,7 +107,7 @@ function imageUpdate (newPos) {
 
 // Main ****************************************************
 
-dotsCreation(slides)
+dotsCreation()
 
 
 // EventListener on left arrow
