@@ -61,21 +61,21 @@ function newIndexCalculation (direction) {
 			if (direction==="right") {
 				if (i === dotsArray.length-1) {
 					dotsArray[0] = true
-					return [i, 0]
+					return 0
 				}
 				else {
 					dotsArray[i+1] = true
-					return [i, i+1]
+					return i+1
 				}
 			}
 			else {
 				if (i === 0) {
 					dotsArray[dotsArray.length-1] = true
-					return [i, dotsArray.length-1]
+					return dotsArray.length-1
 				}
 				else {
 					dotsArray[i-1] = true
-					return [i, i-1]
+					return i-1
 				}
 			}
 		}
@@ -84,7 +84,7 @@ function newIndexCalculation (direction) {
 
 
 // Dots update
-function dotsUpdate (oldPos, newPos) {
+function dotsUpdate (newPos) {
 	let oldDot = document.querySelector(".dot_selected")
 	oldDot.classList.remove("dot_selected")
 	
@@ -111,10 +111,8 @@ dotsCreation(slides)
 // EventListener on left arrow
 const arrowLeft = document.querySelector(".arrow_left")
 arrowLeft.addEventListener ("click", () => {
-	positions = newIndexCalculation("left")
-	oldPos = positions[0]
-	newPos = positions[1]
-	dotsUpdate (oldPos, newPos)
+	newPos = newIndexCalculation("left")
+	dotsUpdate (newPos)
 	imageUpdate (newPos)
 })
 
@@ -122,9 +120,7 @@ arrowLeft.addEventListener ("click", () => {
 // EventListener on right arrow
 const arrowRight = document.querySelector(".arrow_right")
 arrowRight.addEventListener ("click", () => {
-	positions = newIndexCalculation("right")
-	oldPos = positions[0]
-	newPos = positions[1]
-	dotsUpdate (oldPos, newPos)
+	newPos = newIndexCalculation("right")
+	dotsUpdate (newPos)
 	imageUpdate (newPos)
 })
