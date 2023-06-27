@@ -35,6 +35,7 @@ function dotsCreation (slideArray) {
 
 	for (let i = 0; i < slideArray.length; i++) {
 		let selectedState = false
+		
 		const dotElement = document.createElement("div")
 		dotElement.classList.add("dot")
 		dotElement.setAttribute("id", "dot_"+i)
@@ -97,6 +98,7 @@ function dotsUpdate (newPos) {
 function imageUpdate (newPos) {
 	let imageContener = document.querySelector(".banner-img")
 	imageContener.src = `./assets/images/slideshow/${slides[newPos].image}`
+
 	let imageText = document.querySelector(".banner-txt")
 	imageText.innerHTML = `<p>${slides[newPos].tagLine}</p>`
 }
