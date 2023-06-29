@@ -70,22 +70,22 @@ function newPositionCalculation (direction) {
 
 
 // Dots update
-function dotsUpdate (newPos) {
+function dotsUpdate () {
 	let oldDot = document.querySelector(".dot_selected")
 	oldDot.classList.remove("dot_selected")
 	
-	let newDot = document.getElementById("dot_"+newPos)
+	let newDot = document.getElementById("dot_"+position)
 	newDot.classList.add("dot_selected")
 }
 
 
 // Image update
-function imageUpdate (newPos) {
+function imageUpdate () {
 	let imageContener = document.querySelector(".banner-img")
-	imageContener.src = `./assets/images/slideshow/${slides[newPos].image}`
+	imageContener.src = `./assets/images/slideshow/${slides[position].image}`
 
 	let imageText = document.querySelector(".banner-txt")
-	imageText.innerHTML = `<p>${slides[newPos].tagLine}</p>`
+	imageText.innerHTML = `<p>${slides[position].tagLine}</p>`
 }
 
 
@@ -99,8 +99,8 @@ dotsCreation()
 const arrowLeft = document.querySelector(".arrow_left")
 arrowLeft.addEventListener ("click", () => {
 	newPositionCalculation("left")
-	dotsUpdate (position)
-	imageUpdate (position)
+	dotsUpdate ()
+	imageUpdate ()
 })
 
 
@@ -108,6 +108,6 @@ arrowLeft.addEventListener ("click", () => {
 const arrowRight = document.querySelector(".arrow_right")
 arrowRight.addEventListener ("click", () => {
 	newPositionCalculation("right")
-	dotsUpdate (position)
-	imageUpdate (position)
+	dotsUpdate ()
+	imageUpdate ()
 })
