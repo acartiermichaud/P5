@@ -21,8 +21,8 @@ const slides = [
 ]
 
 
-// Array of dots states
-let dotsArray = []
+// Carrousel position
+let position = 0
 
 
 
@@ -34,51 +34,36 @@ function dotsCreation () {
 	const dotsContener = document.querySelector(".dots")
 
 	for (let i = 0; i < slides.length; i++) {
-		let selectedState = false
-		
 		const dotElement = document.createElement("div")
 		dotElement.classList.add("dot")
 		dotElement.setAttribute("id", "dot_"+i)
 		
 		if (i===0) {
-			selectedState = true
 			dotElement.classList.add("dot_selected")
 		}
 
-		dotsArray.push(selectedState)
 		dotsContener.appendChild(dotElement)
 	}
 }
 
 
 // Calculation of new index
-function newIndexCalculation (direction) {
+function newPositionCalculation (direction) {
 
-	for (let i = 0; i < dotsArray.length; i++) {
-		
-		if (dotsArray[i]) {
-			dotsArray[i] = false
-
-			if (direction==="right") {
-				if (i === dotsArray.length-1) {
-					dotsArray[0] = true
-					return 0
-				}
-				else {
-					dotsArray[i+1] = true
-					return i+1
-				}
-			}
-			else {
-				if (i === 0) {
-					dotsArray[dotsArray.length-1] = true
-					return dotsArray.length-1
-				}
-				else {
-					dotsArray[i-1] = true
-					return i-1
-				}
-			}
+	if (direction==="right") {
+		if (position === slides.length-1) {
+			position = 0
+		}
+		else {
+			position ++
+		}
+	}
+	else {
+		if (position === 0) {
+			position = slides.length-1
+		}
+		else {
+			position --
 		}
 	}
 }
@@ -113,16 +98,16 @@ dotsCreation()
 // EventListener on left arrow
 const arrowLeft = document.querySelector(".arrow_left")
 arrowLeft.addEventListener ("click", () => {
-	newPos = newIndexCalculation("left")
-	dotsUpdate (newPos)
-	imageUpdate (newPos)
+	newPositionCalculation("left")
+	dotsUpdate (position)
+	imageUpdate (position)
 })
 
 
 // EventListener on right arrow
 const arrowRight = document.querySelector(".arrow_right")
 arrowRight.addEventListener ("click", () => {
-	newPos = newIndexCalculation("right")
-	dotsUpdate (newPos)
-	imageUpdate (newPos)
+	newPositionCalculation("right")
+	dotsUpdate (position)
+	imageUpdate (position)
 })
